@@ -1,0 +1,7 @@
+name: mlops-course
+
+conda_env: environment.yml
+
+entry_points:
+    train:
+        command: "python train.py"
