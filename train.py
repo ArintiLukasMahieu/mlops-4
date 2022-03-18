@@ -11,6 +11,22 @@ from sklearn.model_selection import train_test_split
 ## Model saving
 import pickle
 
+## Parser arguments
+import argparse
+
+
+# Set our parser arguments. I like to add this mlflow_run argument so we can still test things out outside of an mlflow run environment by running 'python train.py'
+parser = argparse.ArgumentParser(
+    description='Titanic training script')
+
+parser.add_argument('--mlflow_run', default=0, type=int,
+                    help="Running as an experiment or not. Don't change this, this gets automatically changed by the MLFlow default parameters")
+
+args = parser.parse_args()
+
+if args.mlflow_run:
+    from mlflow import log_metric, log_param, log_artifacts
+
 # Main function for training model on split train data and evaluating on validation data
 def main():
     # Read preprocessed training data
@@ -24,7 +40,9 @@ def main():
     X_train, X_valid, y_train, y_valid = train_test_split(X_full, y_full, test_size=0.3, random_state=0)
     
     # Train a RandomForestClassifier
-    model = RandomForestClassifier(n_estimators=20, random_state=0)
+    n_estimators = 100
+    model = RandomForestClassifier(n_estimators=n_estimators, random_state=0)
+    
     print(f'Training {model}')
     model.fit(X_train, y_train)
     
@@ -34,6 +52,13 @@ def main():
     # Show our model accuracy on the validation data
     accuracy = metrics.accuracy_score(y_valid, predict)
     print('Valid Accuracy: ',np.round(accuracy, 4))
+    
+    # Log hyperparameters of the model and output metrics
+    if args.mlflow_run:
+        print('Tracking MLFlow params & metrics')
+        log_param('n_estimators',n_estimators)
+        log_metric('Validation accuracy', accuracy)
+        log_metric('Training accuracy', metrics.accuracy_score(y_train, model.predict(X_train))) # This can be interesting to see how much we're overfitting on our data
     
     # Train model on the full dataset
     model.fit(X_full, y_full)
