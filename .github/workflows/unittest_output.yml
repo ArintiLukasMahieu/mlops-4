@@ -14,7 +14,7 @@ on:
   workflow_run:
     workflows: ["run-pipeline"]
     types:
-      - complete
+      - completed
       
 jobs:
   output_test:
