@@ -10,8 +10,8 @@ on:
       - 'data/output/**.csv'
   workflow_dispatch:
     branches:
-    - 'unittest_output'
-    - 'main'
+      - 'unittest_output'
+      - 'main'
       
 jobs:
   output_test:
@@ -19,7 +19,9 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      
+        with:
+          token: ${{secrets.PAT}}
       - name: output_test
         uses: ./.github/actions/unittest_output
+
         
