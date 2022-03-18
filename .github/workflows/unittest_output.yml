@@ -10,11 +10,11 @@ on:
       - 'data/output/**.csv'
   workflow_dispatch:
     branches:
-    - 'unittest_input'
+    - 'unittest_output'
     - 'main'
       
 jobs:
-  input_test:
+  output_test:
     runs-on: ubuntu-latest
     
     steps:
