@@ -1,0 +1,25 @@
+# Name of workflow
+name: unittest_input
+
+on:
+  push:
+    branches:
+      - 'unittest_output'
+      - 'main'
+    paths:
+      - 'data/output/**.csv'
+  workflow_dispatch:
+    branches:
+    - 'unittest_output'
+    - 'main'
+      
+jobs:
+  output_test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: output_test
+        uses: ./.github/actions/unittest_output
+        
