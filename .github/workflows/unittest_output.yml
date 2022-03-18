@@ -8,10 +8,10 @@ on:
       - 'main'
     paths:
       - 'data/output/**.csv'
-  workflow_dispatch:
-    branches:
-      - 'unittest_output'
-      - 'main'
+#  workflow_dispatch:
+#    branches:
+#      - 'unittest_output'
+#      - 'main'
   
   # Github does not allow automatic workflow triggering from other workflows to avoid recursive workflow triggering.
   # To ensure that our unittest_output also runs when new outputs are pushed from the pipeline workflow, we need to add the code bellow.
