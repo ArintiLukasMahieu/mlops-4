@@ -28,7 +28,7 @@ jobs:
           pip install pandas
           pip install numpy
           python preprocessing.py
-    # Step 3: Commit and push
+    # Commit and push
       - name: Commit and push
         run: |-
           git config user.name "Automated"
@@ -38,13 +38,13 @@ jobs:
           git commit -m "Update preprocessed data: ${timestamp}" || exit 0
           git push
           
-      # Run python training script
+    # Run python training script
       - name: train-step
         run: |
           echo "Running model training pipeline"
           pip install scikit-learn
           python train.py
-    # Step 3: Commit and push
+    # Commit and push
       - name: Commit and push
         run: |-
           git config user.name "Automated"
@@ -52,6 +52,20 @@ jobs:
           git add -A
           timestamp=$(date -u)
           git commit -m "Update trained model: ${timestamp}" || exit 0
+          git push
+    # Run python training script
+      - name: inference-step
+        run: |
+          echo "Running inference pipeline"
+          python inference.py
+    # Commit and push
+      - name: Commit and push
+        run: |-
+          git config user.name "Automated"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          timestamp=$(date -u)
+          git commit -m "Update predictions: ${timestamp}" || exit 0
           git push
       
 
