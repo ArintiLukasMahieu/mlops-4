@@ -7,7 +7,7 @@ on:
       - 'unittest_output'
       - 'main'
     paths:
-      - 'data/raw/**.csv'
+      - 'data/output/**.csv'
   workflow_dispatch:
     branches:
     - 'unittest_input'
