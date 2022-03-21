@@ -7,7 +7,7 @@ Compared to where we started, I would say that we already made a whole lot of pr
 
 A big part of Machine Learning that we still haven't talked about are of course the trained models themselves.
 Data Science is an iterative process: we test a model, we make some small changes either to the model itself or to the data, and we then test the model again.  
-Some production workflows are set-up to test tens or hundreds of models per **day**. How do we keep of which model with which parameters performed best? We could just output our results to a .txt file each time, however that's going to get real messy real quick...
+Some production workflows are set-up to test tens or hundreds of models per **day**. How do we keep track of which model with which parameters performed best? We could just output our results to a .txt file each time, however that's going to get real messy real quick...
 
 ## Theory
 
